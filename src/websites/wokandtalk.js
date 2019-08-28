@@ -3,10 +3,8 @@ const helpers = require('../helpers')
 const slack = require('../slackBlock')
 
 module.exports = (function() {
-  const URI = 'https://www.facebook.com/pg/wokandtalk/posts/?ref=page_internal'
-
   let _data = null
-  let _context = `<${URI}|Pełne menu>`
+  let _context = null
 
   const scrape = async function() {
     const posts = await facebook('wokandtalk')
@@ -18,8 +16,10 @@ module.exports = (function() {
 
     if (presentMenu) {
       _data = presentMenu.content.filter(line => (
-        !line.match(/lunch/i) && !line.match(/\d{4}/)
+        !line.match(/lunch/i)
       ))
+
+      _context = `<${presentMenu.directLink}|Menu na fb>`
     }
 
     return this
