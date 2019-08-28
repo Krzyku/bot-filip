@@ -1,0 +1,14 @@
+{
+  "name": "bot-filip",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Kacper Jasiński <jasinski.it@gmail.com>",
+  "license": "BEERWARE",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "superagent": "^5.1.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.517.0"
+  }
+}
