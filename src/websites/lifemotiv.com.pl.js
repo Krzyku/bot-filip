@@ -14,9 +14,21 @@ module.exports = (function() {
       .filter((i, el) => $(el).text().match(/lunch/i))
       .parent()
       .next()
-      .find('.theme-product-name')
+      .find('.theme-product')
       .toArray()
-      .map(el => '• ' + $(el).text().trim())
+      .map(container => ({
+        name: $(container).find('.theme-product-name').text().trim(),
+        description: $(container).find('.theme-product-desc').text().trim()
+      }))
+      .map(({name, description}) => {
+        let text = `• ${name}`
+
+        if (description) {
+          text += ` _(${description})_`
+        }
+
+        return text
+      })
 
     return this
   }
