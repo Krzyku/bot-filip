@@ -8,7 +8,11 @@ module.exports = (function() {
   const scrape = async function() {
     const $ = await scrapeWebsite('https://kuchniazasciana.pl/dzisiejsze-menu/')
 
-    const dateInfo = $('.cp_main__subpage__menu__date').text()
+    const dateInfo = $('.cp_main__subpage__menu__date')
+      .text()
+      .replace(/\s+/g, ' ')
+      .trim()
+
     _context = `${dateInfo} <https://kuchniazasciana.pl/dzisiejsze-menu/|kuchniazasciana.pl/dzisiejsze-menu>`
 
     _data = $('.cp_main__subpage__menu__todaydish')
