@@ -11,9 +11,13 @@ module.exports = (function() {
     const dateInfo = $('.cp_main__subpage__menu__date').text()
     _context = `${dateInfo} <https://kuchniazasciana.pl/dzisiejsze-menu/|kuchniazasciana.pl/dzisiejsze-menu>`
 
-    _data = $('.cp_main__subpage__menu__todaydish > div')
-      .map((i, el) => $(el).text().trim())
-      .toArray()
+    _data = $('.cp_main__subpage__menu__todaydish')
+      .text()
+      .split('\n')
+      .map(line => line.trim())
+      .filter(Boolean)
+      .map(line => line.endsWith(':') ? '*' + line + '*' : '• ' + line)
+
 
     return this
   }
