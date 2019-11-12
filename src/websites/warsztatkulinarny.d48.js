@@ -12,7 +12,7 @@ module.exports = (function() {
 
     if (presentMenu) {
       _data = presentMenu
-      _context = `<${presentMenu.directLink}|${[presentMenu.content.join('\n')]}>`
+      _context = `<${presentMenu.directLink}|menu na fb>`
     }
 
     return this
