@@ -8,7 +8,18 @@ module.exports = (function() {
 
   async function scrape() {
     const posts = await facebook('FalconBarCafe')
-    const presentMenu = posts.find(helpers.isTodayPost)
+    const datePattern = /\d{1,2}\.\d{1,2}\.\d{4}/
+    const presentMenu = posts
+      .find(post => {
+        const content = post.content.join('\n')
+        const dateString = (content.match(datePattern) || [])[0]
+
+        if (!dateString) return false
+
+        const date = new Date(dateString.split('.').reverse().join('-'))
+
+        return /menu/i.test(content) && helpers.isToday(date)
+      })
 
     if (!presentMenu) {
       return this
