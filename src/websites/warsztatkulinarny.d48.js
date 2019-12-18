@@ -19,6 +19,10 @@ module.exports = (function() {
   }
 
   function createMessageBlock() {
+    if (_data.images.length === 0) {
+      return [slack.section(_data.content.join('\n'))]
+    }
+
     return [slack.image({
       alt: 'menu warsztat kulinarny',
       url: _data.images[0],
