@@ -24,17 +24,24 @@ module.exports = async pageId => {
 
       const directLink = FB + $(el).find('.timestampContent').closest('a').attr('href')
 
-      const content = userContent
-        .find('p')
-        .map((i, el) => {
-          $(el).find('br').replaceWith('\n')
+      const p = userContent.find('p')
+      let content = []
 
-          return $(el)
-            .text()
-            .split('\n')
-        })
-        .toArray()
-        .map(line => line.trim())
+      if (p.length) {
+        content = p
+          .map((i, el) => {
+            $(el).find('br').replaceWith('\n')
+
+            return $(el)
+              .text()
+              .split('\n')
+          })
+          .toArray()
+      } else {
+        content = userContent.text().split('\n')
+      }
+
+      content = content.map(line => line.trim())
 
       return {
         date: new Date(utime),
